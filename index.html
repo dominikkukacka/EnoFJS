@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+
+    <title>Enofjs by EnoF</title>
+  </head>
+
+  <body>
+
+    <header>
+      <div class="container">
+        <h1>Enofjs</h1>
+        <h2>OO based programming in Javascript</h2>
+
+        <section id="downloads">
+          <a href="https://github.com/EnoF/EnoFJS/zipball/master" class="btn">Download as .zip</a>
+          <a href="https://github.com/EnoF/EnoFJS/tarball/master" class="btn">Download as .tar.gz</a>
+          <a href="https://github.com/EnoF/EnoFJS" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
+        </section>
+      </div>
+    </header>
+
+    <div class="container">
+      <section id="main_content">
+        <h1>EnoFJS</h1>
+
+<p>OO based programming in Javascript, is often hard to understand. 
+Most people with a C# or Java background often lose track of the 
+variable scopes. </p>
+
+<p>Keep in mind that Javascript won't be compiled like C# or Java. 
+This means that all errors like undeclared members/typo's, etc. 
+won't be found untill your code is reached. Therefore it's highly
+recommended to use a unit test framework, such as Jasmine.</p>
+
+<h2>Goal</h2>
+
+<p>In EnoFJS the C# or Java like class is simulated in Javascript.
+The goal of this project, is to help people understand Javascript 
+and its way of scoping variables. </p>
+
+<h2>Overview</h2>
+
+<p>EnoFJS is a layer, that translates your class declaration into
+a class with your declared scoping on methods and properties. To 
+make this work, you need to understand OO-programming. The examples 
+should be sufficient for an advanced OO-programmer.</p>
+
+<h2>Support</h2>
+
+<p>At this moment EnoFJS supports:</p>
+
+<ul>
+<li>Namespacing</li>
+<li>Class Declarations</li>
+<li>public properties</li>
+<li>public methods</li>
+<li>protected properties</li>
+<li>protected methods</li>
+<li>private properties</li>
+<li>private methods</li>
+<li>Class Constants</li>
+<li>Class Extentions</li>
+<li>Class Imports</li>
+</ul><h2>Exameples</h2>
+
+<p>Declaring a class</p>
+
+<pre><code>Class('Test', function(){});
+var test = new Test();
+</code></pre>
+
+<p>Declaring properties</p>
+
+<pre><code>Class('Test', function(){
+    this.privateProperty('boolean', 'foo', false);
+    this.publicProperty('string', 'food', 'banana');
+    this.protectedProperty('integer', 'fool', 0);
+    this.privateMethod('boolean', 'getFoo', function(){
+        return this.foo;
+    });
+    this.publicMethod('string', 'getFood', function(){
+        return this.food;
+    });
+    this.protectedMethod('boolean', 'upFool', function(){
+        this.fool++;
+    });
+});
+</code></pre>
+
+<p>Declaring constants</p>
+
+<pre><code>Class('Test', 
+function(){}, 
+function(){
+    this.constants('string', 'FOO', 'BAR');
+});
+
+Test.FOO;//BAR
+</code></pre>
+
+<p>Package a class</p>
+
+<pre><code>Class('com.provictores.Test', function(){});
+var test = new com.provictores.Test();
+</code></pre>
+
+<p>Import a class</p>
+
+<pre><code>Class('com.provictores.Foo', function(){
+    this.publicProperty('string', 'food', 'banana');
+});
+
+Class('com.provictores.Bar', function(){
+    this.import('com.provictores.Foo'); //access with this.Foo
+
+    this.publicMethod('string', 'getFood', function(){
+        return this.Foo.food; //banana
+    });
+});
+</code></pre>
+
+<p>Extending a class</p>
+
+<pre><code>Class('com.provictores.Foo', function(){
+    this.privateProperty('boolean', 'foo', false);
+    this.publicProperty('string', 'food', 'banana');
+    this.protectedProperty('integer', 'fool', 0);
+    this.privateMethod('boolean', 'getFoo', function(){
+        return this.foo;
+    });
+    this.publicMethod('string', 'getFood', function(){
+        return this.food;
+    });
+    this.protectedMethod('boolean', 'upFool', function(){
+        this.fool++;
+    });
+});
+
+Class('com.provictores.Bar', function(){
+    this.extends('com.provictores.Foo'); 
+
+    // @overides the method in foo
+    this.publicMethod('string', 'getFood', function(){
+        //this.foo will return "undefined" as food is a private property
+        //this.food will return "banana" as food is a public property
+        //this.upFool will execute the method upFool as this is a protected method
+        return "I " + this.foo + " " + this.food + " and I said this " + this.upFool() + " times";
+    });
+});
+</code></pre>
+      </section>
+    </div>
+
+              <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-32226156-1");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+  </body>
+</html>
