@@ -1,7 +1,10 @@
 Class('models.Position', function(x, y){
+	
+	this.import('models.Character');
+	
 	this.privateProperty('number', 'x', x);
 	this.privateProperty('number', 'y', y);
-	
+	this.privateProperty(this.Character, 'character', null);
 	this.privateProperty(Array, 'bonus', []);
 	
 	this.publicMethod(Array, 'getBonusses', function(){
