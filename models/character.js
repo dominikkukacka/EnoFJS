@@ -2,7 +2,6 @@ Class('models.Character', function(pos){
 	this.import('models.Position');
 	
 	this.privateProperty(this.Position, 'position', pos);
-	pos.occupyCharacter(this);
 	
 	this.publicMethod(this.Position, 'getPosition', function(){
 		return this.position;
@@ -18,4 +17,7 @@ Class('models.Character', function(pos){
 		this.position = pos;
 		pos.occupyCharacter(this);
 	});
+	
+	//constructor logic
+	pos.occupyCharacter(this);
 });

@@ -1,7 +1,8 @@
 describe('Game functions', function(){
 	
 	var _position,
-		_character;
+		_character,
+		_map;
 	
 	beforeEach(function(){
 		
@@ -10,6 +11,7 @@ describe('Game functions', function(){
 	afterEach(function(){
 		delete _position;
 		delete _character;
+		delete _map;
 	})
 	
 	it('should have different bonus attributes', function(){
@@ -24,6 +26,12 @@ describe('Game functions', function(){
 		_character = new models.Character(_position);
 		
 		expect(_character.getPosition()).toEqual(_position);
+	});
+	
+	it('should be able to initialize a map', function(){
+		_map = new models.Map(100, 100);
+		
+		// expect(_map.getPosition(0, 0) instanceof models.Position).toEqual(true);
 	});
 	
 	describe('Character Movement', function(){
