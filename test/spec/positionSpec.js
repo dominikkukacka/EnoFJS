@@ -7,6 +7,11 @@ describe('Game functions', function(){
 		
 	});
 	
+	afterEach(function(){
+		delete _position;
+		delete _character;
+	})
+	
 	it('should have different bonus attributes', function(){
 		_position = new models.Position(10, 20);
 		_position.addBonus(models.Position.MOVE_RANGE);
@@ -21,4 +26,38 @@ describe('Game functions', function(){
 		expect(_character.getPosition()).toEqual(_position);
 	});
 	
+	describe('Character Movement', function(){
+		
+		var _startPos,
+			_endPos,
+			_otherCharacter;
+			
+		beforeEach(function(){
+			_startPos = new models.Position(10,20);
+			_endPos = new models.Position(10, 21);
+		});
+		
+		afterEach(function(){
+			delete _startPos;
+			delete _endPos;
+			delete _otherCharacter;
+		})
+		
+		it('should be able to move to a position', function(){
+			_character = new models.Character(_startPos);
+			_character.moveTo(_endPos);
+			
+			expect(_character.getPosition()).toEqual(_endPos);
+			expect(_endPos.getCharacter().getPosition()).toEqual(_endPos);
+			expect(_startPos.getCharacter()).toEqual(null);
+		});
+		
+		it('should not allow you to move to a position already occupied', function(){
+			_character = new models.Character(_startPos);
+			_otherCharacter = new models.Character(_endPos);
+			expect(function(){
+				_character.moveTo(_endPos);
+			}).toThrow("Position Occupied");
+		});
+	});
 });
