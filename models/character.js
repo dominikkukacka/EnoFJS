@@ -1,10 +1,19 @@
-Class('models.Character', function(pos){
+Class('models.Character', function(pos, range){
 	this.import('models.Position');
 	
 	this.privateProperty(this.Position, 'position', pos);
 	
+	this.privateProperty(Number, 'moveRange', range);
+	
 	this.publicMethod(this.Position, 'getPosition', function(){
 		return this.position;
+	});
+	
+	this.publicMethod(Array, 'getAvailablePosition', function(){
+		
+		
+		
+		return [];
 	});
 	
 	this.publicMethod(this.Position, 'moveTo', function(pos){
