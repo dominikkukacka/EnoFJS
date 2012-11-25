@@ -13,6 +13,12 @@
 		return createClassWrapper(this);
 	};
 
+	Function.prototype.transformable = function () {
+		var transformable = createClassWrapper(this);
+		transformable.transformable = true;
+		return transformable;
+	};
+
 	function createClassWrapper(OriginalClass, Super) {
 		function ClassWrapper() {
 
