@@ -12,8 +12,12 @@
 		}
 
 		function Transformable() {
-			this.transformsInto = function () {
+			this.transformsInto = function (Form) {
+				var _form, _method;
 
+				_form = new Form();
+
+				mergePublics(_form);
 			};
 		}
 
@@ -23,6 +27,16 @@
 
 		function implementTransformable() {
 			OriginalClass.prototype = new Transformable();
+		}
+		
+		function mergePublics(form) {
+			for (_method in form) {
+				this[_method] = form[_method];
+			}
+		}
+
+		function mergeProtected() {
+
 		}
 
 		implementTransformable();

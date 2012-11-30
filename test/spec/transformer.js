@@ -58,12 +58,12 @@
 		});
 
 		describe('transforming into a class', function () {
-			//it('should be able to transform into an different class', function () {
-			//	var transformer = new Transformer();
-			//	transformer.transformInto(Optimus);
+			it('should be able to transform into an different class', function () {
+				var transformer = new Transformer();
+				transformer.transformsInto(Optimus);
 
-			//	expect(transformer.getVehicle()).toEqual('Truck');
-			//});
+				expect(transformer.getVehicle()).toEqual('Truck');
+			});
 		});
 
 	});
