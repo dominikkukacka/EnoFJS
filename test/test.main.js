@@ -8,7 +8,7 @@
 });
 
 // bootstrap - require, once loaded, kick off test run
-require(['test/spec/classExtentions', 'test/spec/animal', 'test/spec/classSpec', '/base/libs/jquery-1.8.1.js'], function (test) {
+require(['test/spec/classExtentions', 'test/spec/animal', 'test/spec/classSpec', 'test/spec/widget', '/base/libs/jquery-1.8.1.js'], function (test) {
   console.debug($);
   window.__testacular__.start();
 }); 
