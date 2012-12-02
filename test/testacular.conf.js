@@ -19,7 +19,8 @@ files = [
 
   { pattern: '*.js', included: false },
   { pattern: 'test/spec/*.js', included: false },
-  { pattern: 'libs/jquery-1.8.1.js', included: false},
+  { pattern: 'libs/*.js', included: false },
+	{ pattern: 'widgets/**/*.*', included: false},
   // Main
   'test/test.main.js'
 ];
