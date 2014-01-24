@@ -40,6 +40,14 @@
                 expect(last.getNext()).toEqual(null);
                 expect(last.getPrevious()).toEqual(list.getById(1));
             });
+
+            it('should be able to add an node after another node', function addAfter() {
+                var middle = list.getById(1);
+                var newNode = list.addAfter(1, 3, 'four');
+                expect(middle.getNext()).toEqual(newNode);
+                expect(newNode.getPrevious()).toEqual(middle);
+                expect(newNode.getNext()).toEqual(list.getLast());
+            });
         });
     });
 }());

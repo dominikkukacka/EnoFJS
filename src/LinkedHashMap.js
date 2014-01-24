@@ -54,7 +54,13 @@
             count: 0,
             first: null,
             last: null,
-            hashMap: {}
+            hashMap: {},
+            add: function add(key, value) {
+                var newNode = new Node(key, value);
+                this.private.hashMap[key] = newNode;
+                this.private.count++;
+                return newNode;
+            }
         };
 
         this.protected = {
@@ -62,6 +68,7 @@
                 var nextNode = node.getNext();
                 if (nextNode !== null) {
                     nextNode.setPrevious(newNode);
+                    newNode.setNext(nextNode);
                 }
                 node.setNext(newNode);
                 newNode.setPrevious(node);
@@ -70,15 +77,21 @@
 
         this.public = {
             add: function add(key, value) {
-                var newNode = new Node(key, value);
-                this.private.hashMap[key] = newNode;
-                if (this.private.count === 0) {
+                var newNode = this.private.add(key, value);
+                if (this.private.count === 1) {
                     this.private.first = this.private.hashMap[key];
                 } else {
                     this.protected.addAfter(this.private.last, newNode);
                 }
                 this.private.last = this.private.hashMap[key];
-                this.private.count++;
+
+                return newNode;
+            },
+            addAfter: function addAfter(nodeKeyToInsertAfter, newKey, newValue) {
+                var newNode = this.private.add(newKey, newValue);
+                var nodeToInsertAfter = this.private.hashMap[nodeKeyToInsertAfter];
+                this.protected.addAfter(nodeToInsertAfter, newNode);
+                return newNode;
             },
             getById: function getById(position) {
                 var counter = 0;
