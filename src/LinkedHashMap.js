@@ -72,6 +72,15 @@
                 }
                 node.setNext(newNode);
                 newNode.setPrevious(node);
+            },
+            addBefore: function addBefore(node, newNode) {
+                var previousNode = node.getPrevious();
+                if (previousNode !== null) {
+                    previousNode.setNext(newNode);
+                    newNode.setPrevious(previousNode);
+                }
+                node.setPrevious(newNode);
+                newNode.setNext(node);
             }
         };
 
@@ -91,6 +100,12 @@
                 var newNode = this.private.add(newKey, newValue);
                 var nodeToInsertAfter = this.private.hashMap[nodeKeyToInsertAfter];
                 this.protected.addAfter(nodeToInsertAfter, newNode);
+                return newNode;
+            },
+            addBefore: function addBefore(nodeKeyToInsertBefore, newKey, newValue) {
+                var newNode = this.private.add(newKey, newValue);
+                var nodeToInsertBefore = this.private.hashMap[nodeKeyToInsertBefore];
+                this.protected.addBefore(nodeToInsertBefore, newNode);
                 return newNode;
             },
             getById: function getById(position) {

@@ -48,6 +48,14 @@
                 expect(newNode.getPrevious()).toEqual(middle);
                 expect(newNode.getNext()).toEqual(list.getLast());
             });
+
+            it('should be able to add an node before another node', function addBefore() {
+                var middle = list.getById(1);
+                var newNode = list.addBefore(1, 3, 'four');
+                expect(middle.getPrevious()).toEqual(newNode);
+                expect(newNode.getNext()).toEqual(middle);
+                expect(newNode.getPrevious()).toEqual(list.getFirst());
+            });
         });
     });
 }());
