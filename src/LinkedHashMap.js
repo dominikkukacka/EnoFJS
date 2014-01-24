@@ -52,22 +52,35 @@
     var LinkedHashMap = window.LinkedHashMap = Class(function LinkedHashMap() {
         this.private = {
             count: 0,
+            first: null,
+            last: null,
             hashMap: {}
         };
 
         this.public = {
-            add: function add(value) {
-                this.private.hashMap[this.private.count] = new Node(this.private.count, value);
+            add: function add(key, value) {
+                this.private.hashMap[key] = new Node(key, value);
+                if (this.private.count === 0) {
+                    this.private.first = this.private.hashMap[key];
+                } else {
+                    this.private.last = this.private.hashMap[key];
+                }
                 this.private.count++;
             },
-            getByPosition: function getByPosition(position) {
-                return this.private.hashMap[position];
+            getById: function getById(position) {
+                var counter = 0;
+                for (var key in this.private.hashMap) {
+                    if (counter === position) {
+                        return this.private.hashMap[key];
+                    }
+                    counter++;
+                }
             },
             getFirst: function getFirst() {
-                return this.private.hashMap[0];
+                return this.private.first;
             },
             getLast: function getLast() {
-                return this.private.hashMap[this.private.count - 1];
+                return this.private.last;
             }
         };
 

@@ -10,8 +10,8 @@ describe('LinkedHashMap', function LinkedHashMapSpec() {
     describe('initalizing an LinkedHashMap', function initializingLinkedHashMap() {
         it('should be able to add an entry to the list', function addToEmpty() {
             var list = new LinkedHashMap();
-            list.add('hello');
-            expect(list.getByPosition(0).getValue()).toEqual('hello');
+            list.add('hi', 'hello');
+            expect(list.getById(0).getValue()).toEqual('hello');
         });
     });
 
@@ -19,9 +19,9 @@ describe('LinkedHashMap', function LinkedHashMapSpec() {
         var list;
         beforeEach(function beforeEach() {
             list = new LinkedHashMap();
-            list.add('one');
-            list.add('two');
-            list.add('three');
+            list.add(0, 'one');
+            list.add(1, 'two');
+            list.add(2, 'three');
         });
 
         it('should be able to get the first entry of an list', function firstOfList() {
