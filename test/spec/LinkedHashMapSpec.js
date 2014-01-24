@@ -27,5 +27,9 @@ describe('LinkedHashMap', function LinkedHashMapSpec() {
         it('should be able to get the first entry of an list', function firstOfList() {
             expect(list.getFirst().getValue()).toEqual('one');
         });
+
+        it('should be able to get the last entry of an list', function lastOfList() {
+            expect(list.getLast().getValue()).toEqual('three');
+        });
     });
 });

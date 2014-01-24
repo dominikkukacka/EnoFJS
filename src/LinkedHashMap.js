@@ -65,6 +65,9 @@
             },
             getFirst: function getFirst() {
                 return this.private.hashMap[0];
+            },
+            getLast: function getLast() {
+                return this.private.hashMap[this.private.count - 1];
             }
         };
 
