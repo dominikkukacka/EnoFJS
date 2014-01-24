@@ -60,6 +60,14 @@
                 this.private.hashMap[key] = newNode;
                 this.private.count++;
                 return newNode;
+            },
+            remove: function remove(node) {
+                var key = node.getKey();
+                if (node === this.private.first) {
+                    this.private.first = this.private.first.getNext();
+                    this.private.first.setPrevious(null);
+                }
+                delete this.private.hashMap[key];
             }
         };
 
@@ -131,6 +139,9 @@
             },
             getLast: function getLast() {
                 return this.private.last;
+            },
+            removeFirst: function removeFirst() {
+                return this.private.remove(this.private.first);
             }
         };
 

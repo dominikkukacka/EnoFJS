@@ -72,6 +72,13 @@
                 expect(newNode.getPrevious()).toEqual(last);
                 expect(newNode.getNext()).toEqual(null);
             });
+
+            it('should be able to delete the first entry', function removeFirst() {
+                list.removeFirst();
+                var first = list.getFirst();
+                expect(first.getValue()).toEqual('two');
+                expect(first.getPrevious()).toEqual(null);
+            });
         });
     });
 }());
