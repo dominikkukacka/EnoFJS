@@ -58,6 +58,10 @@
         this.public = {
             add: function add(value) {
                 this.private.hashMap[this.private.count] = new Node(this.private.count, value);
+                this.private.count++;
+            },
+            getByPosition: function getByPosition(position) {
+                return this.private.hashMap[position];
             }
         };
 
