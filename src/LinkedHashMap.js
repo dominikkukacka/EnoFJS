@@ -62,6 +62,9 @@
             },
             getByPosition: function getByPosition(position) {
                 return this.private.hashMap[position];
+            },
+            getFirst: function getFirst() {
+                return this.private.hashMap[0];
             }
         };
 
