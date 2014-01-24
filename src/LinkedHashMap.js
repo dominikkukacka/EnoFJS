@@ -69,6 +69,9 @@
                 } else if (node === this.private.last) {
                     this.private.last = this.private.last.getPrevious();
                     this.private.last.setNext(null);
+                } else {
+                    node.getPrevious().setNext(node.getNext());
+                    node.getNext().setPrevious(node.getPrevious());
                 }
                 delete this.private.hashMap[key];
             }
@@ -128,20 +131,17 @@
             addLast: function addLast(newKey, newValue) {
                 return this.public.add(newKey, newValue);
             },
-            getById: function getById(position) {
-                var counter = 0;
-                for (var key in this.private.hashMap) {
-                    if (counter === position) {
-                        return this.private.hashMap[key];
-                    }
-                    counter++;
-                }
+            getById: function getById(key) {
+                return this.private.hashMap[key];
             },
             getFirst: function getFirst() {
                 return this.private.first;
             },
             getLast: function getLast() {
                 return this.private.last;
+            },
+            remove: function remove(key) {
+                return this.private.remove(this.public.getById(key));
             },
             removeFirst: function removeFirst() {
                 return this.private.remove(this.private.first);
@@ -155,4 +155,7 @@
 
         };
     });
-}(window));
+}
+    (window)
+    )
+;

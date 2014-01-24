@@ -11,7 +11,7 @@
         describe('initalizing an LinkedHashMap', function initializingLinkedHashMap() {
             it('should be able to add an entry to the list', function addToEmpty() {
                 var list = new LinkedHashMap();
-                list.add('hi', 'hello');
+                list.add(0, 'hello');
                 expect(list.getById(0).getValue()).toEqual('hello');
                 expect(list.getById(0).getNext()).toEqual(null);
                 expect(list.getById(0).getPrevious()).toEqual(null);
@@ -85,6 +85,13 @@
                 var last = list.getLast();
                 expect(last.getValue()).toEqual('two');
                 expect(last.getNext()).toEqual(null);
+            });
+
+            it('should be able to remove an entry in the middle', function remove() {
+                list.remove(1);
+                expect(list.getById(1)).toEqual(null);
+                expect(list.getFirst().getNext()).toEqual(list.getLast());
+                expect(list.getLast().getPrevious()).toEqual(list.getFirst());
             });
         });
     });
