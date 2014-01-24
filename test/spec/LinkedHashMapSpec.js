@@ -79,6 +79,13 @@
                 expect(first.getValue()).toEqual('two');
                 expect(first.getPrevious()).toEqual(null);
             });
+
+            it('should be able to remove the last entry', function removeLast() {
+                list.removeLast();
+                var last = list.getLast();
+                expect(last.getValue()).toEqual('two');
+                expect(last.getNext()).toEqual(null);
+            });
         });
     });
 }());

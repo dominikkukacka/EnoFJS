@@ -66,6 +66,9 @@
                 if (node === this.private.first) {
                     this.private.first = this.private.first.getNext();
                     this.private.first.setPrevious(null);
+                } else if (node === this.private.last) {
+                    this.private.last = this.private.last.getPrevious();
+                    this.private.last.setNext(null);
                 }
                 delete this.private.hashMap[key];
             }
@@ -142,6 +145,9 @@
             },
             removeFirst: function removeFirst() {
                 return this.private.remove(this.private.first);
+            },
+            removeLast: function removeLast() {
+                return this.private.remove(this.private.last);
             }
         };
 
