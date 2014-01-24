@@ -41,7 +41,7 @@
                 expect(last.getPrevious()).toEqual(list.getById(1));
             });
 
-            it('should be able to add an node after another node', function addAfter() {
+            it('should be able to add a node after another node', function addAfter() {
                 var middle = list.getById(1);
                 var newNode = list.addAfter(1, 3, 'four');
                 expect(middle.getNext()).toEqual(newNode);
@@ -49,12 +49,28 @@
                 expect(newNode.getNext()).toEqual(list.getLast());
             });
 
-            it('should be able to add an node before another node', function addBefore() {
+            it('should be able to add a node before another node', function addBefore() {
                 var middle = list.getById(1);
                 var newNode = list.addBefore(1, 3, 'four');
                 expect(middle.getPrevious()).toEqual(newNode);
                 expect(newNode.getNext()).toEqual(middle);
                 expect(newNode.getPrevious()).toEqual(list.getFirst());
+            });
+
+            it('should be able to add a node at the beginning of the list', function addFirst() {
+                var first = list.getFirst();
+                var newNode = list.addFirst(3, 'four');
+                expect(first.getPrevious()).toEqual(newNode);
+                expect(newNode.getNext()).toEqual(first);
+                expect(newNode.getPrevious()).toEqual(null);
+            });
+
+            it('should be able to add a node at the end of the list', function addLast() {
+                var last = list.getLast();
+                var newNode = list.addLast(3, 'four');
+                expect(last.getNext()).toEqual(newNode);
+                expect(newNode.getPrevious()).toEqual(last);
+                expect(newNode.getNext()).toEqual(null);
             });
         });
     });

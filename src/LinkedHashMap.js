@@ -108,6 +108,15 @@
                 this.protected.addBefore(nodeToInsertBefore, newNode);
                 return newNode;
             },
+            addFirst: function addFirst(newKey, newValue) {
+                var newNode = this.private.add(newKey, newValue);
+                var first = this.private.first;
+                this.protected.addBefore(first, newNode);
+                return newNode;
+            },
+            addLast: function addLast(newKey, newValue) {
+                return this.public.add(newKey, newValue);
+            },
             getById: function getById(position) {
                 var counter = 0;
                 for (var key in this.private.hashMap) {
