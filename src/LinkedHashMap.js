@@ -37,15 +37,15 @@
                 return this.private.next;
             },
             setNext: function setNext(next) {
-                this.private.key = next;
+                this.private.next = next;
             }
         };
 
         this.constructor = function constructor(key, value, previous, next) {
             this.private.key = key;
             this.private.value = value;
-            this.private.previous = previous;
-            this.private.next = next;
+            this.private.previous = previous || null;
+            this.private.next = next || null;
         };
     });
 
@@ -57,14 +57,27 @@
             hashMap: {}
         };
 
+        this.protected = {
+            addAfter: function addAfter(node, newNode) {
+                var nextNode = node.getNext();
+                if (nextNode !== null) {
+                    nextNode.setPrevious(newNode);
+                }
+                node.setNext(newNode);
+                newNode.setPrevious(node);
+            }
+        };
+
         this.public = {
             add: function add(key, value) {
-                this.private.hashMap[key] = new Node(key, value);
+                var newNode = new Node(key, value);
+                this.private.hashMap[key] = newNode;
                 if (this.private.count === 0) {
                     this.private.first = this.private.hashMap[key];
                 } else {
-                    this.private.last = this.private.hashMap[key];
+                    this.protected.addAfter(this.private.last, newNode);
                 }
+                this.private.last = this.private.hashMap[key];
                 this.private.count++;
             },
             getById: function getById(position) {
