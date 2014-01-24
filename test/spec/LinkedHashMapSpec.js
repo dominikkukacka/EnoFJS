@@ -16,6 +16,33 @@
                 expect(list.getById(0).getNext()).toEqual(null);
                 expect(list.getById(0).getPrevious()).toEqual(null);
             });
+
+            it('should be able to add the first entry with addFirst', function addFirstAsFirst() {
+                var list = new LinkedHashMap();
+                list.addFirst(0, 'hello');
+                expect(list.getById(0).getValue()).toEqual('hello');
+                expect(list.getById(0).getNext()).toEqual(null);
+                expect(list.getById(0).getPrevious()).toEqual(null);
+            });
+
+            it('should be able to add the first entry with addLast', function addLastAsFirst() {
+                var list = new LinkedHashMap();
+                list.addLast(0, 'hello');
+                expect(list.getById(0).getValue()).toEqual('hello');
+                expect(list.getById(0).getNext()).toEqual(null);
+                expect(list.getById(0).getPrevious()).toEqual(null);
+            });
+
+            it('should return false when trying to remove something that has not been added', function removeGhost() {
+                var list = new LinkedHashMap();
+                expect(list.remove('ghost')).toEqual(false);
+            });
+
+            it('should return false when trying to remove the first or lastwhen empty', function firstEmpty() {
+                var list = new LinkedHashMap();
+                expect(list.removeFirst()).toEqual(false);
+                expect(list.removeLast()).toEqual(false);
+            });
         });
 
         describe('modifying an LinkedHashMap', function modifyLinkedHashMapSpecs() {
@@ -89,9 +116,29 @@
 
             it('should be able to remove an entry in the middle', function remove() {
                 list.remove(1);
-                expect(list.getById(1)).toEqual(null);
+                expect(function keyNotFound() {
+                    list.getById(1);
+                }).toThrow(new Error('key not found'));
                 expect(list.getFirst().getNext()).toEqual(list.getLast());
                 expect(list.getLast().getPrevious()).toEqual(list.getFirst());
+            });
+
+            it('should prevent adding the same key twice', function preventDuplicateKey() {
+                expect(function testDuplicateKey() {
+                    list.add(1, 'something');
+                }).toThrow(new Error('key already exists in LinkedHashMap'));
+            });
+
+            it('should throw an error when a key is not found in the hashMap', function keyNotFound() {
+                expect(function throwNotFound() {
+                    list.getById('nonexisting');
+                }).toThrow(new Error('key not found'));
+            });
+
+            it('should throw an error when attempted to add after an non existing node', function addAfterNono() {
+                expect(function testNono() {
+                    list.addAfter('nono', 'what', 'ever');
+                }).toThrow(new Error('key not found'));
             });
         });
     });
