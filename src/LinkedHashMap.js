@@ -3,14 +3,14 @@
  *
  * @Author Andy Tang
  */
-(function LinkedHashMapScope(window, undefined) {
+(function LinkedHashMapScope(window, clazz, undefined) {
     'use strict';
 
     /**
      * A node containing a key value pair
      * @type {Node}
      */
-    var Node = Class(function Node() {
+    var Node = clazz(function Node() {
         this.private = {
             key: null,
             value: null,
@@ -58,7 +58,7 @@
      *
      * @type {LinkedHashMap}
      */
-    window.LinkedHashMap = Class(function LinkedHashMap() {
+    window.LinkedHashMap = clazz(function LinkedHashMap() {
         this.private = {
             duplicateKeyError: 'key already exists in LinkedHashMap',
             keyNotFoundError: 'key not found',
@@ -276,4 +276,4 @@
 
         };
     });
-}(window));
+}(window, window.clazz));
